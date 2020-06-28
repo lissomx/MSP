@@ -1,0 +1,16 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*$py.class
+
+.vscode/*
+
+# project temporary files
+
+CelebA_Dataset/*
+!CelebA_Dataset/*.md
+
+model_save/*
+!model_save/*.md
+
+Outputs/*
