@@ -26,8 +26,8 @@ parser.add_argument('-bz', '--batch-size', type=int, default=70,
                     help='input batch size for training (default: 70)')
 parser.add_argument('-iz', '--image-size', type=int, default=256,
                     help='size to resize for CelebA pics (default: 256)')
-parser.add_argument('--epochs', type=int, default=100,
-                    help='number of epochs to train (default: 100)')
+parser.add_argument('--epochs', type=int, default=50,
+                    help='number of epochs to train (default: 50)')
 parser.add_argument('-s', '--save', action='store_true', default=True,
                     help='save model every epoch')
 parser.add_argument('-l', '--load', action='store_true',
@@ -42,6 +42,7 @@ args = parser.parse_args()
 
 # args.load = True
 # args.save = False
+# args.pg = True
 
 print(args)
 
@@ -49,6 +50,9 @@ celeba_zip = "CelebA_Dataset/img_align_celeba.zip"
 celeba_txt = "CelebA_Dataset/list_attr_celeba.txt"
 model_save = 'model_save/'
 output_dir = 'Outputs/'
+
+celeba_zip = "../../RotateVAE/data/CelebA/img_align_celeba.zip"
+celeba_txt = "../../RotateVAE/data/CelebA/list_attr_celeba.txt"
 
 print("CelebA zip file: ", os.path.abspath(celeba_zip))
 print("CelebA txt file: ", os.path.abspath(celeba_txt))
@@ -143,7 +147,7 @@ def train(ep):
         total += b_size
 
         if args.pg:
-            bar_data.set_description(f"ep{ep} -- Loss: {Loss.item()/b_size:.0f}, loss_rec: {l_rec/b_size:.0f},  loss_vae: {l_vae/b_size:.0f}, loss_msp: {l_msp/b_size:.0f}, loss_gan: {Loss_pch.item()/b_size:.0f}|r{D[0]:.3f}|f{D[1]:.3f}, acc: {acc:.4f}, msp_w: {msp_w:.1f}")
+            bar_data.set_description(f"ep{ep} -- Loss: {Loss.item()/b_size:.0f}, loss_rec: {l_rec/b_size:.0f},  loss_vae: {l_vae/b_size:.0f}, loss_msp: {l_msp/b_size:.0f}, loss_gan: {Loss_pch.item()/b_size:.0f}|r{D[0]:.3f}|f{D[1]:.3f}, acc: {acc:.4f}")
             
         (Loss+Loss_pch).backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1)
@@ -218,7 +222,7 @@ if args.load:
     discriminator.eval()
     print("loaded")
 
-# reconstruction(0)
+reconstruction(0)
 
 print(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())} | starting training ...")
 for ep in range(args.ep, args.epochs):

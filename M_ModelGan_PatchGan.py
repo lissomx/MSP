@@ -28,9 +28,10 @@ class PatchGan(nn.Module):
     def forward(self, input):
         output = self.main(input)
         return output.view(output.shape[0],-1)
-    
+
     def loss(self, prod, orgi, training_discriminator=True):
         b_size = prod.shape[0]
+        prod = prod if training_discriminator else prod.clamp(0,1)
         L = F.mse_loss(prod.view(-1), orgi.view(-1), reduction="none")
         L = L.view(b_size,-1).sum(dim=1)
-        return L * 2.5
+        return L * 4
