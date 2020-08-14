@@ -26,8 +26,8 @@ parser.add_argument('-bz', '--batch-size', type=int, default=70,
                     help='input batch size for training (default: 70)')
 parser.add_argument('-iz', '--image-size', type=int, default=256,
                     help='size to resize for CelebA pics (default: 256)')
-parser.add_argument('--epochs', type=int, default=50,
-                    help='number of epochs to train (default: 50)')
+parser.add_argument('--epochs', type=int, default=80,
+                    help='number of epochs to train (default: 80)')
 parser.add_argument('-s', '--save', action='store_true', default=True,
                     help='save model every epoch')
 parser.add_argument('-l', '--load', action='store_true',
@@ -50,9 +50,6 @@ celeba_zip = "CelebA_Dataset/img_align_celeba.zip"
 celeba_txt = "CelebA_Dataset/list_attr_celeba.txt"
 model_save = 'model_save/'
 output_dir = 'Outputs/'
-
-celeba_zip = "../../RotateVAE/data/CelebA/img_align_celeba.zip"
-celeba_txt = "../../RotateVAE/data/CelebA/list_attr_celeba.txt"
 
 print("CelebA zip file: ", os.path.abspath(celeba_zip))
 print("CelebA txt file: ", os.path.abspath(celeba_txt))

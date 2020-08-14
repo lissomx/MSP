@@ -140,3 +140,19 @@ class CnnVae(nn.Module):
     def predict_ex(self, x, label, new_ls=None, weight=1.0):
         return self.predict(x,new_ls,weight)
 
+
+        
+    def get_U(self, eps=1e-5):
+
+        from scipy import linalg, compress
+
+        # get the null matrix N of M
+        # such that U=[M;N] is orthogonal
+        M = self.M.detach().cpu()
+        A = torch.zeros(M.shape[1]-M.shape[0], M.shape[1])
+        A = torch.cat([M, A])
+        u, s, vh = linalg.svd(A.numpy())
+        null_mask = (s <= eps)
+        null_space = compress(null_mask, vh, axis=0)
+        N = torch.tensor(null_space)
+        return torch.cat([self.M, N.to(self.M.device)])

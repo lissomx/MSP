@@ -2,7 +2,7 @@
 
 This code corresponding to the paper: **Latent Space Factorisation and Manipulation via Matrix Subspace Projection (ICML2020)**.
 
-The main web page is here https://xiao.ac/proj/msp.
+The main website is here https://xiao.ac/proj/msp.
 
 This code is based on
 
@@ -34,6 +34,8 @@ You can use the parameter *-pg* to show the training progress.
 
 The trained model will be saved in *./model_save/* .
 
+Alternatively, you can download the pre-trained model (from https://s3.eu-west-2.amazonaws.com/nn.models/MSP_CelebA.tch), and put the file *MSP_CelebA.tch* in *./model_save/* .
+
 ### Step 3: Testing
 
 The file *testing_CelebA.py* can be used to generate the example pictures (including the picture used in the ICML paper).
@@ -42,16 +44,21 @@ The file *testing_CelebA.py* can be used to generate the example pictures (inclu
 ```
 The generated pictures will be in *./Outputs/* .
 
+### Textural Experiments (TBD)
+
+The code for the text experiment is being collated and will be released soon.
+
 ## Paper and Citation
 
-This work has been published in ICML2020. [Here is the paper of the near camera-ready version](https://xiao.ac/_data/msp/MSP-icml2020-near-camera-ready.pdf). If you find MSP interesting, please consider citing:
+This work has been published in ICML2020. [Here is the paper of the near camera-ready version](https://arxiv.org/abs/1907.12385). If you find MSP interesting, please consider citing:
 
 > &nbsp;
-> @inproceedings{li2020msp,
-  title={Latent Space Factorisation and Manipulation via Matrix Subspace Projection },
-  author={Li, Xiao and Lin, Chenghua and Li, Ruizhe and Wang, Chaozheng and Guerin, Frank},
-  booktitle={Proceedings of the 37th International Conference on Machine Learning},
-  year={2020}
+> @incollection{icml2020_1832,
+ author = {Li, Xiao and Lin, Chenghua and Li, Ruizhe and Wang, Chaozheng and Guerin, Frank},
+ booktitle = {Proceedings of Machine Learning and Systems 2020},
+ pages = {3211--3221},
+ title = {Latent Space Factorisation and Manipulation via Matrix Subspace Projection},
+ year = {2020}
 }
 > &nbsp;
 
